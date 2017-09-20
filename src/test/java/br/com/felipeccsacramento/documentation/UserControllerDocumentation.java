@@ -7,6 +7,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -109,6 +110,8 @@ public class UserControllerDocumentation {
 			.andExpect(MockMvcResultMatchers.status().isCreated())
 			.andExpect(MockMvcResultMatchers.header().string("location", "http://localhost:8080/users/1"))
 			.andDo(document("create-user",
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				requestFields(requestFields),
 				responseHeaders(headerWithName("location").description("URI do recurso criado com Id do usuário"))
 			));
@@ -130,6 +133,8 @@ public class UserControllerDocumentation {
 			.andExpect(jsonPath("$.address").value(firstUser.getAddress()))
 			.andExpect(jsonPath("$.phone").value(firstUser.getPhone().replaceAll("\\D", "")))
 			.andDo(document("get-user", 
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				pathParameters(parameterWithName("id").description("Id do usuário")),
 				responseFields(getUserFields())
 			));
@@ -152,6 +157,8 @@ public class UserControllerDocumentation {
 			.andExpect(jsonPath("$.address").value(firstUser.getAddress()))
 			.andExpect(jsonPath("$.phone").value(firstUser.getPhone().replaceAll("\\D", "")))
 			.andDo(document("get-user-by-cpf", 
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				pathParameters(parameterWithName("cpf").description("CPF do usuário")),
 				responseFields(getUserFields())
 			));
@@ -218,6 +225,8 @@ public class UserControllerDocumentation {
 			.andExpect(jsonPath("$[1].address").value(secondUser.getAddress()))
 			.andExpect(jsonPath("$[1].phone").value(secondUser.getPhone().replaceAll("\\D", "")))
 			.andDo(document("get-users-list", 
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				responseFields(fieldWithPath("[]").description("Array de usuários"))
 					.andWithPrefix("[].",getUserFields())
 			));
@@ -244,6 +253,8 @@ public class UserControllerDocumentation {
 			.andExpect(jsonPath("$.address").value(firstUser.getAddress()))
 			.andExpect(jsonPath("$.phone").value(firstUser.getPhone().replaceAll("\\D", "")))
 			.andDo(document("patch-user", 
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				pathParameters(parameterWithName("id").description("Id do usuário")),
 				requestFields(
 					fieldWithPath("firstName").description("Nome do usuário"),
@@ -270,6 +281,8 @@ public class UserControllerDocumentation {
 			.andExpect(jsonPath("$.address").value(firstUser.getAddress()))
 			.andExpect(jsonPath("$.phone").value(firstUser.getPhone().replaceAll("\\D", "")))
 			.andDo(document("update-user", 
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				pathParameters(parameterWithName("id").description("Id do usuário")),
 				requestFields(getUserFields()),
 				responseFields(getUserFields())
@@ -300,6 +313,8 @@ public class UserControllerDocumentation {
 		mockMvc.perform(post("/users/bulk").content(mapper.writeValueAsString(users)).contentType(MediaType.APPLICATION_JSON)).andDo(print())
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andDo(document("create-users-bulk", 
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				requestFields(fieldWithPath("[]").description("Array de usuários"))
 					.andWithPrefix("[].", responseFields))
 			);
@@ -324,6 +339,8 @@ public class UserControllerDocumentation {
 		mockMvc.perform(delete("/users/{id}", user.getId()).contentType(MediaType.APPLICATION_JSON)).andDo(print())
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andDo(document("delete-user",
+				preprocessRequest(prettyPrint()),
+				preprocessResponse(prettyPrint()),
 				pathParameters(parameterWithName("id").description("Id do usuário"))
 			));	
 	}
