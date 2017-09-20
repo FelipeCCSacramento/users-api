@@ -21,6 +21,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<spring-restdocs.version>1.2.1.RELEASE</spring-restdocs.version>
+		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -28,17 +30,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -57,6 +48,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- Swagger 2 -->
@@ -84,6 +86,13 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.bitbucket.radistao.test</groupId>
+			<artifactId>before-after-spring-test-runner</artifactId>
+			<version>0.1.0</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -92,8 +101,89 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*Documentation.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.3</version>
+				<executions>
+					<execution>
+						<id>generate-docs</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>html</backend>
+							<doctype>book</doctype>
+							<attributes>
+								<snippets>${project.build.directory}/generated-snippets</snippets>
+								<sourceDirectory>src/docs/asciidocs</sourceDirectory>
+                					<outputDirectory>target/generated-docs</outputDirectory>
+							</attributes>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework.restdocs</groupId>
+						<artifactId>spring-restdocs-asciidoctor</artifactId>
+						<version>1.2.1.RELEASE</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/generated-docs</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 
 </project>

@@ -1,0 +1,285 @@
+= Restful Users Guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[introduction]
+= Introduction
+
+Restful Users is a web service for demonstration of CRUD operations using Spring Tecnologies.
+
+[getting-started]
+= Getting started
+
+[getting-started-running-the-service]
+== Running the service
+Restful Users is written using http://projects.spring.io/spring-boot[Spring Boot] which
+makes it easy to get it up and running so that you can start exploring the REST API.
+
+The first step is to clone the Git repository:
+
+[source,bash]
+----
+$ git clone https://github.com/spring-projects/spring-restdocs
+----
+
+Once the clone is complete, you're ready to get the service up and running:
+
+[source,bash]
+----
+$ cd users-api
+$ ./mvnw clean package spring-boot:run
+----
+
+Server will be started at http://localhost:8080.
+
+= Resources
+
+== Users REST Service
+
+=== GetUserById
+
+==== CURL request
+
+include::{snippets}/get-user/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/get-user/http-request.adoc[]
+
+==== Request parameters
+
+include::{snippets}/get-user/path-parameters.adoc[]
+
+==== Response fields
+
+include::{snippets}/get-user/response-fields.adoc[]
+
+==== HTTP response
+
+include::{snippets}/get-user/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/get-user/response-body.adoc[]
+
+
+
+
+
+=== GetUserByCPF
+
+==== CURL request
+
+include::{snippets}/get-user-by-cpf/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/get-user-by-cpf/http-request.adoc[]
+
+==== Request parameters
+
+include::{snippets}/get-user-by-cpf/path-parameters.adoc[]
+
+==== Response fields
+
+include::{snippets}/get-user-by-cpf/response-fields.adoc[]
+
+==== HTTP response
+
+include::{snippets}/get-user-by-cpf/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/get-user-by-cpf/response-body.adoc[]
+
+
+
+
+=== GetUsersList
+
+==== CURL request
+
+include::{snippets}/get-users-list/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/get-users-list/http-request.adoc[]
+
+==== Response fields
+
+include::{snippets}/get-users-list/response-fields.adoc[]
+
+==== HTTP response
+
+include::{snippets}/get-users-list/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/get-users-list/response-body.adoc[]
+
+
+
+
+=== AddUser
+
+==== CURL request
+
+include::{snippets}/create-user/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/create-user/http-request.adoc[]
+
+==== Request fields
+
+include::{snippets}/create-user/request-fields.adoc[]
+
+==== Request body
+
+include::{snippets}/create-user/request-body.adoc[]
+
+==== HTTP response
+
+include::{snippets}/create-user/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/create-user/response-body.adoc[]
+
+==== Response headers
+
+include::{snippets}/create-user/response-headers.adoc[]
+
+
+
+
+
+=== AddBulkUsers
+
+==== CURL request
+
+include::{snippets}/create-users-bulk/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/create-users-bulk/http-request.adoc[]
+
+==== Request fields
+
+include::{snippets}/create-users-bulk/request-fields.adoc[]
+
+==== Request body
+
+include::{snippets}/create-users-bulk/request-body.adoc[]
+
+==== HTTP response
+
+include::{snippets}/create-users-bulk/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/create-users-bulk/response-body.adoc[]
+
+
+
+
+=== DeleteUser
+
+==== CURL request
+
+include::{snippets}/delete-user/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/delete-user/http-request.adoc[]
+
+==== Request parameters
+
+include::{snippets}/delete-user/path-parameters.adoc[]
+
+==== HTTP response
+
+include::{snippets}/delete-user/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/delete-user/response-body.adoc[]
+
+
+
+
+=== PatchUser
+
+==== CURL request
+
+include::{snippets}/patch-user/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/patch-user/http-request.adoc[]
+
+==== Request parameters
+
+include::{snippets}/patch-user/path-parameters.adoc[]
+
+==== Request fields
+
+include::{snippets}/patch-user/request-fields.adoc[]
+
+==== Request body
+
+include::{snippets}/patch-user/request-body.adoc[]
+
+==== Response fields
+
+include::{snippets}/patch-user/response-fields.adoc[]
+
+==== HTTP response
+
+include::{snippets}/patch-user/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/patch-user/response-body.adoc[]
+
+
+
+
+=== UpdateUser
+
+==== CURL request
+
+include::{snippets}/update-user/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/update-user/http-request.adoc[]
+
+==== Request parameters
+
+include::{snippets}/update-user/path-parameters.adoc[]
+
+==== Request fields
+
+include::{snippets}/update-user/request-fields.adoc[]
+
+==== Request body
+
+include::{snippets}/update-user/request-body.adoc[]
+
+==== Response fields
+
+include::{snippets}/update-user/response-fields.adoc[]
+
+==== HTTP response
+
+include::{snippets}/update-user/http-response.adoc[]
+
+==== Response body
+
+include::{snippets}/update-user/response-body.adoc[]
+
