@@ -9,7 +9,16 @@
 [introduction]
 = Introduction
 
-Restful Users is a web service for demonstration of CRUD operations using Spring Tecnologies.
+Restful Users is a web service for demonstration of CRUD operations using Spring Platform.
+This API uses a embedded in-memory database for integration tests and store users data.
+
+.Technologies
+* Spring Boot
+* Spring Data JPA
+* Spring Rest Docs
+* H2 Database
+* Lombok
+
 
 [getting-started]
 = Getting started
@@ -19,7 +28,16 @@ Restful Users is a web service for demonstration of CRUD operations using Spring
 Restful Users is written using http://projects.spring.io/spring-boot[Spring Boot] which
 makes it easy to get it up and running so that you can start exploring the REST API.
 
-The first step is to clone the Git repository:
+To start the application, you must https://github.com/FelipeCCSacramento/users-api/raw/master/release/users-api-0.0.1-SNAPSHOT.jar[download]
+and execute JAR file.
+
+[source,bash]
+----
+$ java -jar users-api-0.0.1-SNAPSHOT.jar
+---- 
+
+
+Alternatively, you can download/build/run from source.The first step is to clone the Git repository:
 
 [source,bash]
 ----
@@ -35,6 +53,8 @@ $ ./mvnw clean package spring-boot:run
 ----
 
 Server will be started at http://localhost:8080.
+
+This documentation is available at http://localhost:8080/docs/index.html
 
 = Resources
 
